@@ -13,7 +13,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Ensure all necessary files and directories are copied
 COPY main.py .
 COPY router_prompt.py .
-COPY service_account_key.json .
 COPY utils/ ./utils/
 EXPOSE 5000
 
