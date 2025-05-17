@@ -120,6 +120,13 @@ def chat():
             "thinking_steps": thinking_steps
         }), 500
 
+
+@app.route('/health_check', methods=['POST'])
+@observe()
+def health_check():
+    print("health-check logged")
+    return True
+
 if __name__ == '__main__':
     # Runs the development server. For production, use a WSGI server like Gunicorn or Waitress.
     app.run(debug=True) # debug=True enables auto-reloading and detailed error pages
