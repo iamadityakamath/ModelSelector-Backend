@@ -129,4 +129,4 @@ def health_check():
 
 if __name__ == '__main__':
     # Runs the development server. For production, use a WSGI server like Gunicorn or Waitress.
-    app.run(debug=True) # debug=True enables auto-reloading and detailed error pages
+    app.run(debug=True, host='0.0.0.0', port=5000) # debug=True enables auto-reloading and detailed error pages
