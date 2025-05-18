@@ -121,11 +121,11 @@ def chat():
         }), 500
 
 
-@app.route('/health_check', methods=['POST'])
+@app.route('/health_check', methods=['GET'])
 @observe()
 def health_check():
     print("health-check logged")
-    return True
+    return "Success"
 
 if __name__ == '__main__':
     # Runs the development server. For production, use a WSGI server like Gunicorn or Waitress.
