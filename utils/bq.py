@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 load_dotenv() # Load environment variables from .env file
 
-from google.oauth2 import service_account # Added for service account
+# Removed: from google.oauth2 import service_account
 
 def initialize_bq_client():
     """Initializes the BigQuery client and table reference.
@@ -21,21 +21,18 @@ def initialize_bq_client():
         BIGQUERY_PROJECT_ID = os.environ.get("BIGQUERY_PROJECT_ID")
         BIGQUERY_DATASET_ID = os.environ.get("BIGQUERY_DATASET_ID")
         BIGQUERY_TABLE_ID = os.environ.get("BIGQUERY_TABLE_ID")
-        SERVICE_ACCOUNT_FILE = os.path.join(os.path.dirname(__file__), '..', 'service_account_key.json') # Path to the key file
+        # Removed: SERVICE_ACCOUNT_FILE = os.path.join(os.path.dirname(__file__), '..', 'service_account_key.json')
 
         if not all([BIGQUERY_PROJECT_ID, BIGQUERY_DATASET_ID, BIGQUERY_TABLE_ID]):
             print("Warning: BigQuery environment variables (PROJECT_ID, DATASET_ID, TABLE_ID) not fully set. BigQuery logging disabled.")
             return None, None
 
-        if not os.path.exists(SERVICE_ACCOUNT_FILE):
-            print(f"Warning: Service account key file not found at {SERVICE_ACCOUNT_FILE}. BigQuery logging disabled.")
-            return None, None
-        else:
-            credentials = service_account.Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE)
-            client = bigquery.Client(project=BIGQUERY_PROJECT_ID, credentials=credentials)
-            table_ref = client.dataset(BIGQUERY_DATASET_ID).table(BIGQUERY_TABLE_ID)
-            print(f"BigQuery client initialized using service account for table: {BIGQUERY_PROJECT_ID}.{BIGQUERY_DATASET_ID}.{BIGQUERY_TABLE_ID}")
-            return client, table_ref
+        # Removed: Service account file check and loading
+        # The client will now use Application Default Credentials
+        client = bigquery.Client(project=BIGQUERY_PROJECT_ID)
+        table_ref = client.dataset(BIGQUERY_DATASET_ID).table(BIGQUERY_TABLE_ID)
+        print(f"BigQuery client initialized using default credentials for table: {BIGQUERY_PROJECT_ID}.{BIGQUERY_DATASET_ID}.{BIGQUERY_TABLE_ID}")
+        return client, table_ref
 
     except Exception as e:
         print(f"Error initializing Google BigQuery client: {e}")
