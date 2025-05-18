@@ -20,7 +20,7 @@ load_dotenv()
 MODEL = os.getenv("MODEL")
 # Initialize Flask app
 app = Flask(__name__)
-CORS(app, resources={r"/chat": {"origins": ["http://localhost:5173","https://modelselector-backend-1051022814597.us-central1.run.app","https://modelselection.kamathaditya.com/"]}})
+CORS(app, resources={r"/chat": {"origins": ["http://localhost:5173","https://modelselector-backend-1051022814597.us-central1.run.app","https://modelselection.kamathaditya.com"]}})
 
 # Initialize Google GenAI Client
 try:
